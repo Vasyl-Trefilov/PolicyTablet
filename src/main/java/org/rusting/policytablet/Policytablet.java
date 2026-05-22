@@ -8,6 +8,10 @@ import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
+
+import org.rusting.policytablet.item.AdminTabletItem;
+import org.rusting.policytablet.item.TabletItem;
+import org.rusting.policytablet.network.ModMessages;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -52,9 +56,14 @@ public class Policytablet {
     // Creates a new food item with the id "policytablet:example_id", nutrition 1 and saturation 2
     public static final RegistryObject<Item> EXAMPLE_ITEM = ITEMS.register("example_item", () -> new Item(new Item.Properties().food(new FoodProperties.Builder().alwaysEat().nutrition(1).saturationMod(2f).build())));
 
+    public static final RegistryObject<Item> TABLET = ITEMS.register("tablet", () -> new TabletItem(new Item.Properties().stacksTo(1)));
+    public static final RegistryObject<Item> ADMIN_TABLET = ITEMS.register("admin_tablet", () -> new AdminTabletItem(new Item.Properties().stacksTo(1)));
+
     // Creates a creative tab with the id "policytablet:example_tab" for the example item, that is placed after the combat tab
-    public static final RegistryObject<CreativeModeTab> EXAMPLE_TAB = CREATIVE_MODE_TABS.register("example_tab", () -> CreativeModeTab.builder().withTabsBefore(CreativeModeTabs.COMBAT).icon(() -> EXAMPLE_ITEM.get().getDefaultInstance()).displayItems((parameters, output) -> {
-        output.accept(EXAMPLE_ITEM.get()); // Add the example item to the tab. For your own tabs, this method is preferred over the event
+    public static final RegistryObject<CreativeModeTab> EXAMPLE_TAB = CREATIVE_MODE_TABS.register("example_tab", () -> CreativeModeTab.builder().withTabsBefore(CreativeModeTabs.COMBAT).icon(() -> TABLET.get().getDefaultInstance()).displayItems((parameters, output) -> {
+        output.accept(EXAMPLE_ITEM.get());
+        output.accept(TABLET.get());
+        output.accept(ADMIN_TABLET.get());
     }).build());
 
     public Policytablet() {
@@ -78,6 +87,8 @@ public class Policytablet {
 
         // Register our mod's ForgeConfigSpec so that Forge can create and load the config file for us
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Config.SPEC);
+
+        ModMessages.register();
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
