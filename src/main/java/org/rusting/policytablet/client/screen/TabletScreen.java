@@ -29,7 +29,7 @@ public class TabletScreen extends Screen {
                         net.minecraft.client.Minecraft.getInstance().setScreen(new MapScreen());
                     }
                 })
-                .bounds(guiLeft + 38, guiTop + 60, 100, 20)
+                .bounds(guiLeft + 38, guiTop + 10, 100, 20)
                 .build());
 
         addRenderableWidget(Button.builder(
@@ -39,7 +39,27 @@ public class TabletScreen extends Screen {
                         net.minecraft.client.Minecraft.getInstance().setScreen(new BankScreen());
                     }
                 })
-                .bounds(guiLeft + 38, guiTop + 90, 100, 20)
+                .bounds(guiLeft + 38, guiTop + 40, 100, 20)
+                .build());
+
+        addRenderableWidget(Button.builder(
+                        Component.literal("Auction"),
+                        button -> {
+                            if (Minecraft.getInstance().player != null) {
+                                net.minecraft.client.Minecraft.getInstance().setScreen(new AuctionScreen());
+                            }
+                        })
+                .bounds(guiLeft + 38, guiTop + 70, 100, 20)
+                .build());
+
+        addRenderableWidget(Button.builder(
+                        Component.literal("Shop"),
+                        button -> {
+                            if (Minecraft.getInstance().player != null) {
+                                net.minecraft.client.Minecraft.getInstance().setScreen(new ShopScreen());
+                            }
+                        })
+                .bounds(guiLeft + 38, guiTop + 100, 100, 20)
                 .build());
     }
 
