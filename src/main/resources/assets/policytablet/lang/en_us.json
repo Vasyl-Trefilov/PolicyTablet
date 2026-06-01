@@ -1,4 +1,6 @@
 {
+  "block.policytablet.wire": "Barbed Wire",
+  "block.policytablet.test_block": "Test Block",
   "item.policytablet.tablet": "Tablet",
   "item.policytablet.admin_tablet": "Admin Tablet",
   "item.policytablet.example_item": "Example Item"

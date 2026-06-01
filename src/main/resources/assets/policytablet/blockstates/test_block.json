@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "policytablet:block/test_block"
+    }
+  }
+}
